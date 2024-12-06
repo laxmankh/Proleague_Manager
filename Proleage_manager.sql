@@ -1,17 +1,20 @@
-
 CREATE TABLE Purple_Cap (
 Record_ID INT AUTO_INCREMENT PRIMARY KEY,
 Player_ID INT,
 Player_Name VARCHAR(100), Team_ID INT,
 Wickets_Taken INT, Matches_Played INT
 );
+
+
 CREATE TABLE Orange_Cap (
 Record_ID INT AUTO_INCREMENT PRIMARY KEY,
 Player_ID INT,
 Player_Name VARCHAR(100), Team_ID INT,
 Runs_Scored INT, Matches_Played INT
 );
- 
+
+
+
 DELIMITER $$
 CREATE TRIGGER after_player_insert_purple_cap AFTER INSERT ON Players
 FOR EACH ROW BEGIN
@@ -28,7 +31,10 @@ Player_Name, Team_ID, Wickets_Taken, Matches_Played)
 VALUES (NULL, NEW.id, NEW.name, NEW.team_id, NEW.wickets, 1);
 END IF;
 END $$ DELIMITER ;
- 
+
+
+
+
 DELIMITER $$
 
 CREATE TRIGGER after_player_insert AFTER INSERT ON Players
@@ -48,6 +54,9 @@ END IF;
 END $$
  
 DELIMITER ;
+
+
+
 
 ALTER TABLE Players
 ADD Wickets_Taken INT DEFAULT 0, ADD Runs INT DEFAULT 0;
